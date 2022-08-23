@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AddItem from "./components/AddItem";
 import Content from "./components/Content";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -21,27 +22,56 @@ function App() {
         }
     ]);
 
+    const[newItem, setNewItem] = useState('');
+
+    const setAndSaveItems = (newItems) =>{
+        setItems(newItems);
+        localStorage.setItem('shoppingList', JSON.stringify(newItems));
+    }
+
+    const addItem = (item) =>{
+        const id = items.length ? items[items.length - 1].id + 1 : 1;
+        const newItem = {
+            id,
+            checked: false,
+            item
+        };
+        const listItems = [...items, newItem];
+        setAndSaveItems(listItems);
+    }
+
     const handleCheck = (id) => {
         const listItems = items.map((item) => item.id === id ? {
             ...item,
             checked: !item.checked
         } : item);
-        setItems(listItems);
-        localStorage.setItem('shoppingList', JSON.stringify(listItems));
+        setAndSaveItems(listItems);
     }
 
     const handleDelete = (id) => {
         const listItems = items.filter((item) => item.id !== id);
-        setItems(listItems);
-        localStorage.setItem('shoppingList', JSON.stringify(listItems));
+        setAndSaveItems(listItems);
+    }
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        if(!newItem) return;
+        // addItem 
+        addItem(newItem);
+        setNewItem('')
     }
     return (
         <div className="app">
             <Header title='Groceries'/>
+            <AddItem 
+                newItem={ newItem }
+                setNewItem={ setNewItem }
+                handleSubmit={ handleSubmit }
+            />
             <Content 
-              items={items}
-              handleCheck={ handleCheck }
-              handleDelete={ handleDelete }
+                items={items}
+                handleCheck={ handleCheck }
+                handleDelete={ handleDelete }
             />
             <Footer />
         </div>
