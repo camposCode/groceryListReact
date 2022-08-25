@@ -156,6 +156,8 @@ button:hover {
   outline: none;
 }
 
+/* ************SEARCH************* */
+
 .searchForm {
   width: 100%;
   display: flex;
