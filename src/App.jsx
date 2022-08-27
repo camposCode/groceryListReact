@@ -7,14 +7,27 @@ import SearchItem from "./components/SearchItem";
 
 
 function App() {
-    const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppingList')) || []);
+    const API_URL = 'http://localhost:3500/items';
+
+    const [items, setItems] = useState([]);
 
     const [newItem, setNewItem] = useState('');
     const [search, setSearch] = useState('');
 
     useEffect(() => {
-        localStorage.setItem('shoppinglist', JSON.stringify(items));
-    }, [items]);
+        const fetchItems = async() =>{
+            try{
+                const response = await fetch(API_URL);
+                const listItems = await response.json();
+                console.log(listItems);
+                setItems(listItems);
+            }catch(err){
+                console.log(err.stack)
+            }
+        }
+
+        (async() => await fetchItems())();
+    }, []);
 
     const addItem = (item) => {
         const id = items.length ? items[items.length - 1].id + 1 : 1;

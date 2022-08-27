@@ -2,7 +2,7 @@
     "items":[
         {
             "id": 1,
-            "cehcked": false,
+            "checked": false,
             "item": "milk"
         },
         {
