@@ -1,19 +1,24 @@
 {
-    "items":[
-        {
-            "id": 1,
-            "checked": false,
-            "item": "milk"
-        },
-        {
-            "id": 2,
-            "checked": false,
-            "item": "bread"
-        },
-        {
-            "id": 3,
-            "checked": false,
-            "item": "dog treats"
-        }
-    ]
+  "items": [
+    {
+      "id": 1,
+      "checked": false,
+      "item": "milk"
+    },
+    {
+      "id": 2,
+      "checked": false,
+      "item": "bread"
+    },
+    {
+      "id": 3,
+      "checked": false,
+      "item": "dog treats"
+    },
+    {
+      "id": 4,
+      "checked": false,
+      "item": "cookies"
+    }
+  ]
 }
